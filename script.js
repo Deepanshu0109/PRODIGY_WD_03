@@ -15,7 +15,6 @@ const wins = [
 function check() {
     for (let result of wins) {
         const [a, b, c] = result;
-
         if (clicks[a].textContent !== "" &&
             clicks[a].textContent === clicks[b].textContent &&
             clicks[b].textContent === clicks[c].textContent) {
@@ -24,7 +23,6 @@ function check() {
                 clicks[index].style.background = "greenyellow";
             });
             clicks.forEach(button => button.disabled = true);
-
             if (clicks[a].textContent === "X") {
                 player1.textContent = parseInt(player1.textContent) + 1;
             } else {
@@ -33,20 +31,17 @@ function check() {
             return true;
         }
     }
-
     const draw = [...clicks].every(button => button.textContent !== "");
     if (draw) {
         winnerText.textContent = "Draw";
         return true;
     }
-
     return false;
 }
 
 function aiMove() {
     const emptyButtons = [...clicks].filter(btn => btn.textContent === "");
     if (emptyButtons.length === 0) return;
-
     const randomButton = emptyButtons[Math.floor(Math.random() * emptyButtons.length)];
     randomButton.textContent = "O";
     randomButton.style.color = "black";
@@ -57,16 +52,25 @@ function aiMove() {
 
 clicks.forEach(button => {
     button.addEventListener("click", () => {
-        if (button.textContent === "" && currentTurn === "X") {
-            button.textContent = "X";
-            button.style.color = "red";
-            currentTurn = "O";
-            turn.textContent = currentTurn + "'s Turn";
-
-            if (!check() && isVsAI) {
-                setTimeout(() => {
-                    aiMove();
-                }, 500); 
+        if (button.textContent === "") {
+            if (isVsAI) {
+                if (currentTurn === "X") {
+                    button.textContent = "X";
+                    button.style.color = "red";
+                    currentTurn = "O";
+                    turn.textContent = currentTurn + "'s Turn";
+                    if (!check()) {
+                        setTimeout(() => {
+                            aiMove();
+                        }, 500);
+                    }
+                }
+            } else {
+                button.textContent = currentTurn;
+                button.style.color = currentTurn === "X" ? "red" : "black";
+                currentTurn = currentTurn === "X" ? "O" : "X";
+                turn.textContent = currentTurn + "'s Turn";
+                check();
             }
         }
     });
@@ -104,7 +108,6 @@ function loadScore() {
 }
 window.addEventListener("beforeunload", saveScore);
 window.addEventListener("load", loadScore);
-
 
 const [pvpBtn, aiBtn] = document.querySelectorAll(".gameMode button");
 

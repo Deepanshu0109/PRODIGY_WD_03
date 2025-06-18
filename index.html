@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>O | X</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="gameMode">
+            <h1>GameMode</h1>
+            <button>Player VS Player</button>
+            <button>Player VS AI</button>
+        </div>
+        <div class="gameBox">
+            <p id="winner">TIC - TAC - TOE!</p>
+            <table id="box">
+                <tr>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+                </tr>
+                <tr>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+
+                </tr>
+                <tr>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+                    <td><button class="play"></button></td>
+
+                </tr>
+            </table>
+            <button id="new">New Game</button>
+        </div>
+        <div class="scoreBoard">
+            <p id="turn">X 's Turn</p>
+            <table id=score>
+                <tr>
+                    <th>X</th>
+                    <th>O</th>
+                </tr>
+                <tr>
+                    <td id="Xwin">0</td>
+                    <td id="Owin">0</td>
+                </tr>
+            </table>
+            <button id="resetScore">Reset Score</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>
